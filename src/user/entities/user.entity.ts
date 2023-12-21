@@ -1,6 +1,7 @@
 import { UserRole } from 'src/common/enum/user.role';
 import { RootEntity } from 'src/common/root/root.-entity';
-import { Column, Entity, ManyToMany } from 'typeorm';
+import { Taxy } from 'src/taxies/entities/taxy.entity';
+import { Column, Entity, JoinTable, ManyToMany } from 'typeorm';
 
 @Entity()
 export class User extends RootEntity {
@@ -18,4 +19,9 @@ export class User extends RootEntity {
 
   @Column({ default: false })
   refresh_token: string;
+
+  @ManyToMany(()=>Taxy,(taxi)=>taxi.user,{cascade:true})
+  @JoinTable()
+    taxi:Taxy[]
+
 }

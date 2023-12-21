@@ -1,7 +1,8 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/common';
+import { Controller, Get, Post, Body, Patch, Param, Delete, Query } from '@nestjs/common';
 import { TaxiesService } from './taxies.service';
 import { CreateTaxyDto } from './dto/create-taxy.dto';
 import { UpdateTaxyDto } from './dto/update-taxy.dto';
+import { FindAllTaxiDto } from './dto/findAllTaxiDto';
 
 @Controller('taxies')
 export class TaxiesController {
@@ -13,8 +14,8 @@ export class TaxiesController {
   }
 
   @Get()
-  findAll() {
-    return this.taxiesService.findAll();
+  findAll(@Query() findAllTaxiDto:FindAllTaxiDto) {
+    return this.taxiesService.findAll(findAllTaxiDto);
   }
 
   @Get(':id')
